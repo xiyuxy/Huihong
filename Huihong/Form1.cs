@@ -19,14 +19,10 @@ namespace Huihong
         private void button4_Click(object sender, EventArgs e)
         {
 
+            var ss = new Send();
+            state.Text=ss.Transmission();
             
-            int s = Huihong.Send.SendDataToScale("1", 1207, @"D:\MyCode\tld\tld\bin\x86\Debug\ppplu.txt", 0);
-            if (s == 0)
-            {
-                state.Text = "传输成功";
-            }
-            else
-                state.Text = "传输失败";
+            
         }
         int a = 1;
         int LocationY = 126;
@@ -80,22 +76,8 @@ namespace Huihong
         private void button1_Click(object sender, EventArgs e)
         {
 
-            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-
-            System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection("database=hyl2015;server=127.0.0.1;uid=sa;");
-
-            conn.Open();//打开数据连接
-
-            System.Data.SqlClient.SqlCommand cmd = new System.Data.SqlClient.SqlCommand("select * from goods_inf where len(barcode)<=5;", conn);
-
-            var reader = cmd.ExecuteReader();
-            while (reader.Read())
-             sb.AppendFormat("{0},{1},{3},{3}\r\n", reader[0], reader[1],reader[2],reader[3]); //这里几列，写几列
-            
-            //data.Text = reader.GetString(0);
-              
-                conn.Dispose();//释放数据库连接资源(可以使用using字段，继承了IDispose接口类都可以使用using释放非托管资源）
-                System.IO.File.WriteAllText("plu.txt", sb.ToString());//写入文件
+            var ss = new Send();
+            ss.Writ("DataBase=jh2015;server=127.0.0.1;uid=sa","select * from goods where len(barcode)<6","plu.txt");
             
         }
     }

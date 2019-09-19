@@ -160,17 +160,17 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(364, 206);
+            this.button1.Location = new System.Drawing.Point(469, 57);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 13;
-            this.button1.Text = "button1";
+            this.button1.Text = "数据刷新";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // data
             // 
-            this.data.Location = new System.Drawing.Point(364, 251);
+            this.data.Location = new System.Drawing.Point(469, 126);
             this.data.Name = "data";
             this.data.Size = new System.Drawing.Size(100, 21);
             this.data.TabIndex = 14;
@@ -195,6 +195,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
