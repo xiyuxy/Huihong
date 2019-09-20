@@ -29,15 +29,27 @@ namespace Huihong
         
         private void Built_Click(object sender, EventArgs e)
         {
-            
+            //List<Control> Ctrs = new List<Control> { code,name,ipaddress,state};
+            //foreach (Control ctr in this.Controls)
+            //{
+            //    if (ctr.Location.Y == LocationY)
+            //    {
+            //        Ctrs.Add(ctr);
+
+            //    }
+            //}
+            //Ctrop Sctrop = new Ctrop();
+            //Sctrop.Newctr(LocationY,Ctrs);
+
+
             LocationY += 30;
             for (int i = 0; i < 4; i++)
             {
-                List<string> strname = new List<string> {"code","name","ipaddress","sending" };
-                List<int> intx = new List<int> { code.Location.X,name.Location.X,ipaddress.Location.X,Sending.Location.X};
-                List<Size> sizes = new List<Size> { code.Size,name.Size,ipaddress.Size,state.Size};
+                List<string> strname = new List<string> { "code", "name", "ipaddress", "state" };
+                List<int> intx = new List<int> { code.Location.X, name.Location.X, ipaddress.Location.X, Sending.Location.X };
+                List<Size> sizes = new List<Size> { code.Size, name.Size, ipaddress.Size, state.Size };
                 TextBox textBox9 = new TextBox();
-                textBox9.Name = strname[i]+ a;
+                textBox9.Name = strname[i] + a;
                 textBox9.Location = new Point(intx[i], LocationY);
                 textBox9.Size = sizes[i];
                 this.Controls.Add(textBox9);
@@ -48,24 +60,17 @@ namespace Huihong
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            if (LocationY > 126)
-            {  List<Control> c = new List<Control>();
+            List<Control> Ctrs = new List<Control>();
             foreach (Control ctr in this.Controls)
             {
                 if (ctr.Location.Y == LocationY)
                 {
-                    c.Add(ctr);
-                    
+                    Ctrs.Add(ctr);
+
                 }
             }
-            foreach (Control cc in c)
-            {
-                this.Controls.Remove(cc);
-                cc.Dispose();
-            }
-            
-             LocationY -= 30;
-            }
+            Ctrop Dctrop = new Ctrop();
+            Dctrop.Delctr(LocationY, Ctrs);
         }
 
         private void code_TextChanged(object sender, EventArgs e)
@@ -79,6 +84,11 @@ namespace Huihong
             var ss = new Send();
             ss.Writ("DataBase=jh2015;server=127.0.0.1;uid=sa","select * from goods where len(barcode)<6","plu.txt");
             
+        }
+
+        private void Save_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

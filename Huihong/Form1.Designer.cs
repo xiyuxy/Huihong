@@ -109,6 +109,7 @@
             this.Save.TabIndex = 6;
             this.Save.Text = "保存";
             this.Save.UseVisualStyleBackColor = true;
+            this.Save.Click += new System.EventHandler(this.Save_Click);
             // 
             // Sending
             // 
