@@ -15,7 +15,7 @@ namespace Huihong
         string section, string key, string def,
         StringBuilder retVal, int size, string filePath);
         // 向配置文件写入值
-        public static void ProfileWriteValue(
+        public static void Conwr(
         string section, string key, string value, string path)
         {
             WritePrivateProfileString(section, key, value, path);

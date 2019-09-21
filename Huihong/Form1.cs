@@ -29,30 +29,29 @@ namespace Huihong
         
         private void Built_Click(object sender, EventArgs e)
         {
-            //List<Control> Ctrs = new List<Control> { code,name,ipaddress,state};
-            //foreach (Control ctr in this.Controls)
-            //{
-            //    if (ctr.Location.Y == LocationY)
-            //    {
-            //        Ctrs.Add(ctr);
+            List<Control> Ctrs = new List<Control> ();
+            foreach (Control ctr in this.Controls)
+            {
+                if (ctr.Location.Y ==126)
+                {
+                    Ctrs.Add(ctr);
 
-            //    }
-            //}
-            //Ctrop Sctrop = new Ctrop();
-            //Sctrop.Newctr(LocationY,Ctrs);
+                }
+            }
+            
 
 
             LocationY += 30;
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < Ctrs.Count; i++)
             {
-                List<string> strname = new List<string> { "code", "name", "ipaddress", "state" };
-                List<int> intx = new List<int> { code.Location.X, name.Location.X, ipaddress.Location.X, Sending.Location.X };
-                List<Size> sizes = new List<Size> { code.Size, name.Size, ipaddress.Size, state.Size };
-                TextBox textBox9 = new TextBox();
-                textBox9.Name = strname[i] + a;
-                textBox9.Location = new Point(intx[i], LocationY);
-                textBox9.Size = sizes[i];
-                this.Controls.Add(textBox9);
+               
+                TextBox textBox = new TextBox
+                {
+                    Name = Ctrs[i].Name + a,
+                    Location = new Point(Ctrs[i].Location.X, LocationY),
+                    Size = Ctrs[i].Size
+                };
+                this.Controls.Add(textBox);
                 //textBox9.Text = "123456";
             }
             a += 1;
@@ -60,17 +59,17 @@ namespace Huihong
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            List<Control> Ctrs = new List<Control>();
-            foreach (Control ctr in this.Controls)
+             if(LocationY>126)
+            foreach (Control ctr in this.Controls.Cast<Control>().ToList())
             {
-                if (ctr.Location.Y == LocationY)
+                if (ctr.Location.Y ==LocationY )
                 {
-                    Ctrs.Add(ctr);
-
+                    
+                    this.Controls.Remove(ctr);
+                    ctr.Dispose();
                 }
             }
-            Ctrop Dctrop = new Ctrop();
-            Dctrop.Delctr(LocationY, Ctrs);
+            LocationY -= 30;
         }
 
         private void code_TextChanged(object sender, EventArgs e)
@@ -89,6 +88,32 @@ namespace Huihong
         private void Save_Click(object sender, EventArgs e)
         {
 
+            
+            List<string> key = new List<string> { "IP","NAME","PORT","RESULT"};
+            for (int i = 0; i < a; i++)
+            {
+                List<Control> Ctrs = new List<Control>();
+                foreach (Control ctr in this.Controls)
+                {
+                    if (i != 0)
+                    {
+                        if (ctr.Name == (name.Name + i).ToString() || ctr.Name == (ipaddress.Name + i).ToString())
+                        {
+                            Ctrs.Add(ctr);
+
+                        }
+                    }
+                   else if (ctr.Name == "name" || ctr.Name == "ipaddress")
+                    {
+                        Ctrs.Add(ctr);
+
+                    }
+
+                }
+                for (int j= 2;j > 0;j--)
+                config.Conwr((i+1).ToString(), key[j-1], Ctrs[j-1].Text, @"E:\program\Huihong\Huihong\bin\x86\Debug\ScaleAddress.ini");
+            }
+            
         }
     }
 }
